@@ -1,11 +1,29 @@
-import './App.css';
+import {Link, Route, Routes, useLocation} from 'react-router-dom'
 
-function App() {
-	return (
-		<>
-			<h1>Vite React Typescript Template</h1>
-		</>
-	);
+const About = () => <div>You are on the about page</div>
+const Home = () => <div>You are home</div>
+const NoMatch = () => <div>No match</div>
+
+export const LocationDisplay = () => {
+  const location = useLocation()
+
+  return <div data-testid="location-display">{location.pathname}</div>
 }
 
-export default App;
+export const App = () => (
+  <div>
+    <Link to="/">Home</Link>
+
+    <Link to="/about">About</Link>
+
+    <Routes>
+      <Route path="/" element={<Home />} />
+
+      <Route path="/about" element={<About />} />
+
+      <Route path="*" element={<NoMatch />} />
+    </Routes>
+
+    <LocationDisplay />
+  </div>
+)
